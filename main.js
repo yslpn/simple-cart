@@ -46,7 +46,7 @@ const handleDrop = (event) => {
         if (target.id == "cart") {
             total.textContent = Number.parseInt(total.textContent) + Number.parseInt(dragged.getAttribute('price'));
         
-            target.style.background = "";
+            // target.style.background = "";
             dragged.parentNode.removeChild(dragged);
     
             dragged.setAttribute("draggable", "false");
