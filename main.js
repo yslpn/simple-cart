@@ -25,11 +25,12 @@ const handleDrop = (event) => {
     while (true) {
         if (target.id == "cart") {
 
-            let id = event.dataTransfer.getData("Text");
+            let id = event.dataTransfer.getData("text/plain");
             let item = document.getElementById(id);
 
-            total.textContent = Number.parseInt(total.textContent) + Number.parseInt(item.getAttribute('price'));
-
+            amount = parseInt(item.getAttribute('price'));
+            cart.dispatchEvent(count);
+            
             item.parentNode.removeChild(item);
             item.setAttribute("draggable", "false");
             target.appendChild(item);
@@ -37,6 +38,12 @@ const handleDrop = (event) => {
         }
         target = target.parentNode
     }
+}
+
+let amount = 0;
+const count = new Event('build');
+const handleCount = (event) => {
+    total.textContent = parseInt(total.textContent) + parseInt(amount);
 }
 
 for (const item of items) {
@@ -47,3 +54,4 @@ for (const item of items) {
 
 cart.addEventListener("dragover", handlerDragOver, false);
 cart.addEventListener("drop", handleDrop, false);
+cart.addEventListener('build', handleCount, false);
