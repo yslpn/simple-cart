@@ -5,17 +5,13 @@ const items = document.getElementsByClassName('item'),
       total = document.getElementById('total');
 
 const handlerDragStart = (event) => {
-    event.dataTransfer.setData('text/plain', event.target.id);
     event.target.style.opacity = .5;
+    event.dataTransfer.setData('text/plain', event.target.id);
 }
 
-const handlerDragEnd = (event) => {
-    event.target.style.opacity = "";
-}
+const handlerDragEnd = (event) => event.target.style.opacity = "";
 
-const handlerDragOver = (event) => {
-    event.preventDefault();
-}
+const handlerDragOver = (event) => event.preventDefault();
 
 const handleDrop = (event) => {
     event.preventDefault();
@@ -41,10 +37,8 @@ const handleDrop = (event) => {
 }
 
 let amount = 0;
-const count = new Event('build');
-const handleCount = (event) => {
-    total.textContent = parseInt(total.textContent) + parseInt(amount);
-}
+const count = new Event('count');
+const handleCount = (event) => total.textContent = parseInt(total.textContent) + parseInt(amount);
 
 for (const item of items) {
     item.setAttribute("draggable", "true");
@@ -54,4 +48,4 @@ for (const item of items) {
 
 cart.addEventListener("dragover", handlerDragOver, false);
 cart.addEventListener("drop", handleDrop, false);
-cart.addEventListener('build', handleCount, false);
+cart.addEventListener('count', handleCount, false);
